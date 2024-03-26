@@ -118,8 +118,10 @@ import scipy.stats
 df = pd.read_csv('rodent_2022-2023.csv')  
 
 # data cleaning - change dates to timestamp object
-df['Created Date'] = pd.to_datetime(df['Created Date'])
-df['Closed Date'] = pd.to_datetime(df['Closed Date'])
+df['Created Date'] = pd.to_datetime(df['Created Date'], 
+                                      format = 'mixed')
+df['Closed Date'] = pd.to_datetime(df['Closed Date'], 
+                                      format = 'mixed')
 
 # add column Response Time 
 df['Response Time'] = df['Closed Date'] - df['Created Date']
@@ -137,7 +139,7 @@ hypothesis test on the arrays of sample means.
 ```{python}
 import matplotlib.pyplot as plt 
 
-# select Bronx and Queens boroughs 
+# select Manhattan and Queens boroughs 
 df_mhtn = df[df['Borough'] == 'MANHATTAN']['Response Time'] 
 df_queens = df[df['Borough'] == 'QUEENS']['Response Time']  
 
